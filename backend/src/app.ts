@@ -24,6 +24,7 @@ dotenv.config({ path: resolve(__dirname, '../.env') })
 const app = express()
 const CLIENT_BASE_URL: string = process.env?.CLIENT_BASE_URL!
 
+
 const BYOK_COOKIE = 'personic_byok_key'
 const BYOK_FLAG_COOKIE = 'personic_byok_active'
 const TEN_YEARS_MS = 10 * 365 * 24 * 60 * 60 * 1000

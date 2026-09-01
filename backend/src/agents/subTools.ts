@@ -17,16 +17,17 @@ export const youtubeVideoSearchingTool = tool({
     description:'This tool helps in searching for the youtube videos',
     parameters:z.object({
         query:z.string().trim().describe('name of the search query , searched by user'),
-        videos:z.number().describe('amount of videos the user wants to fetch').default(1),
+        videos:z.number().describe('amount of videos the user wants to fetch').optional(),
         teacherName:z.string().trim().optional().describe('name of the teacher')
     }),
     execute:async ({query,videos,teacherName}) => {
+        let v = videos ?? 1;
         if(teacherName){
             return teacherName.toLowerCase() === 'hitesh'? 
-            await searchVideos(query,videos,HITESH_SIR_CHANNEL_ID):
-            await searchVideos(query,videos,PIYUSH_SIR_CHANNEL_ID)
+            await searchVideos(query,v,HITESH_SIR_CHANNEL_ID):
+            await searchVideos(query,v,PIYUSH_SIR_CHANNEL_ID)
         }
-     return await searchVideos(query,videos)
+     return await searchVideos(query,v)
     },
 })
 export const youtubePlaylistSearchingTool = tool({
@@ -34,16 +35,17 @@ export const youtubePlaylistSearchingTool = tool({
     description:'This tool helps in searching for the youtube playlist',
     parameters:z.object({
         query:z.string().trim().describe('name of the search query , searched by user'),
-        playlists:z.number().describe('amount of playlists the user wants to fetch').default(1),
+        playlists:z.number().describe('amount of playlists the user wants to fetch').optional(),
         teacherName:z.string().trim().optional().describe('name of the teacher')
     }),
     execute:async ({query,playlists,teacherName}) => {
+        let p = playlists ?? 1;
         if(teacherName){
             return teacherName.toLowerCase() === 'hitesh'? 
-            await searchPlaylists(query,playlists,HITESH_SIR_CHANNEL_ID):
-            await searchPlaylists(query,playlists,PIYUSH_SIR_CHANNEL_ID)
+            await searchPlaylists(query,p,HITESH_SIR_CHANNEL_ID):
+            await searchPlaylists(query,p,PIYUSH_SIR_CHANNEL_ID)
         }
-     return await searchPlaylists(query,playlists)
+     return await searchPlaylists(query,p)
     },
 })
 
@@ -68,7 +70,7 @@ export const sendEmailToUserTool = tool({
   description:"Send an email to the user using Resend",
   
   parameters:z.object({
-    user_email:z.string().email().max(100).min(11).describe('email of the user'),
+    user_email:z.string().describe('email of the user'),
     name_of_sender:z.string().describe('sender name'),
     sender_message:z.string().describe('message by sender')
   }),

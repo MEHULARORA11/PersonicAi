@@ -27,7 +27,7 @@ export const hiteshAgent = new Agent({
     youtubePlaylistSearchingTool
     ],
     modelSettings:{
-        maxTokens:2000,
+        maxTokens: 16000,
         temperature: 0.7,
     }
 })
